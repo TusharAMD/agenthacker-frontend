@@ -42,7 +42,7 @@ const [togglevalue, setTogglevalue] = useState(true);
 const [otp, setOtp] = useState('');
 
 useEffect(() => {
-    axios.post(`http://localhost:5000/cipherIt`, { messages })
+    axios.post(`https://agenthacker-tushar.herokuapp.com/cipherIt`, { messages })
       .then(res => {
         //console.log("response",res.data);
         //console.log("messages",messages)
@@ -68,7 +68,7 @@ const sendMessage = async (e) => {
 
   function handleToggle(value) {
     if (value==true){
-    axios.post(`http://localhost:5000/verify`, { email:user.email })
+    axios.post(`https://agenthacker-tushar.herokuapp.com/verify`, { email:user.email })
       .then(res => {
         setOtp(res.data["otp"]);
         const enteredOTP = prompt('Please enter OTP received on your number')
