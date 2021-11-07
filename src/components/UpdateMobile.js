@@ -8,7 +8,7 @@ const UpdateMobile = () => {
   const [mobile, setMobile] = React.useState("");
 
   const handleSubmit = (e) => {
-        axios.post(`http://localhost:5000/updatePh`, { mobile: mobile, user: user.email })
+        axios.post(`https://agenthacker-tushar.herokuapp.com/updatePh`, { mobile: mobile, user: user.email })
         .then(res => {
         console.log("response",res.data);
         })
