@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+## Inspiration
+If you are a Spy or Detective then obviously you can't lead a normal life and use messaging applications made for normies. You need a special messaging app to talk with your mates. Using our app you can chat in public without worring about someone reading your chats.
+## What it does
+Its a web app with real time messaging. The messages are encrypted using Caesar cipher algorithm
+1. Login into the website
+2. Create or Join room
+3. After creating you will get a unique code which can be shared with your friends to chat with you
+4. Any number of people can join the room
+5. Send Messages and it will be encrypted in realtime
+6. Avatars are generated also initials are used so identity is not revealed 
+7. If you wish to see the actual text simply click toggle button and you will get OTP on Whatsapp number using Twilio implementation.
+8. Toggle back to be in encrypted mode
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How we built it
+The following are tech stack we used
+1. React : To perform all frontend operations, make Get and Post requests etc
+2. Flask: For Twilio and also to Caesar cipher the text
+3. Firestore: Realtime database for messaging
+4. Mongodb: To store mobile nos of user for messaging purpose
+5. Twilio: For sending OTPs on Whatsapp
 
-## Available Scripts
+## How it works
+Authentication is done by Auth0, then once user is created he/she adds mobile number to get OTP by Whatsapp using Twilio. This number is saved in database using flask and email id acts as primary key. We have also created a Jdenticon (similar to identicon in github user profile) to give a feel of anonymity and also a nice uniform pattern in group chat. When user clicks create room a unique code is generated in backend (flask) with help of uuid library and then room in created and user is directed there. Its much similar to google meet and then user has to give the link to his/her friends who want to join the chat. Once joined message can be send. These messages are added in firestore database which is realtime and thus it is reflected as soon as someone enters the text. Now database content is send to backend where they are encrypted using Caeser Cipher algorithm and then response (encrypted text) is shown to user. There is toggle just on right of send button which can be clicked to make text readable. But for that user needs to verify themselves. Now we could have done that using email but since we had to twilio we did it using whatsapp and we found that its much more efficient than mails. So after clicking toggle flask creates a 4 digit unique pin which is then send to frontend. This pin is verified and if found correct encryption is remove. To re encrypt the text there is no need for otp as Agent want to hide text real fast. There is no limit to number of people joining the chat room.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Challenges we ran into
+We had hard time figuring out what to choose, websockets or realtime database. We found realtime database would be more efficient.
+## Accomplishments that we're proud of
+We were successfully able to implement whatever we planned and web app working smoothly without any bugs. Also now we are trying to deploy to make available for everyone
+## What we learned
+We learned many things like how to use react in efficient way, using flask but most important was the use of Twilio Whatsapp service which is simple to integrate.
+## What's next for Shhh...Top Secret
+We are planning to use face recognition feature, sending media files and also roles like admin, members to the user of messaging app
